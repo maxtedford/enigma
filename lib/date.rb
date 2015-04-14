@@ -5,23 +5,19 @@ attr_reader :date
     @date = date
   end
 
-  def valid?
-    if @date.class == Fixnum
-      "You have entered a valid number"
-    else
-      "Please enter a six-digit integer"
-    end
-  end
-
   def squared
-    @squared = @date**2
-  end
-
-  def string_that_ish
-    squared.to_s
+    @date.to_i**2
   end
 
   def get_last_four
-    string_that_ish.to_s[-4..-1].to_i
+    @last_four = squared.to_s[-4..-1]
+  end
+
+  def valid?
+    if @date.class == Fixnum
+      "You have entered a valid date"
+    else
+      "Cannot proceed. Please enter a six-digit number as a string in DDMMYY format"
+    end
   end
 end
