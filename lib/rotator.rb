@@ -1,24 +1,32 @@
-require "./lib/character_map"
+require './lib/character_map'
+require './lib/adder'
 
 class Rotator
 attr_reader :current_index
 
-  def initialize(letter)
+  def initialize(message="ruby is hard", adder=Adder.new)
     @char_map = CharacterMap.new.character_map
-    @letter = letter
+    @message = message
+    @adder = adder
   end
 
-  def find_index
-    @current_index = @char_map.rindex(@letter)
+  def slice(string=@message)
+    string.chars.each_slice(4).to_a.map(&:join)
   end
 
-  def rotate_forward(number)
-    @current_index = (@current_index + number) % 39
-    @char_map[@current_index]
+  def rotate_forward
+    slice(@message).map do |group|
+      group.chars.map.with_index do |char, index|
+      @char_map[((@char_map.index(char) + @adder.offsets[index]) % @char_map.length)]
+      end.join
+    end.join
   end
 
-  def rotate_backward(number)
-    @current_index = (@current_index - number) % 39
-    @char_map[@current_index]
+  def rotate_backward
+    slice(@message).map do |group|
+      group.chars.map.with_index do |char, index|
+        @char_map[((@char_map.index(char) - @adder.offsets[index]) % @char_map.length)]
+      end.join
+    end.join
   end
 end

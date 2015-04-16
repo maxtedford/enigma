@@ -1,23 +1,19 @@
 class Date
 attr_reader :date
 
-  def initialize(date)
-    @date = date
+  def initialize(date=today)
+    @date = date.to_i
   end
 
   def squared
-    @date.to_i**2
+    @date**2
   end
 
-  def get_last_four
-    @last_four = squared.to_s[-4..-1]
+  def offsets
+    squared.to_s.chars.last(4).map(&:to_i)
   end
 
-  def valid?
-    if @date.class == Fixnum
-      "You have entered a valid date"
-    else
-      "Cannot proceed. Please enter a six-digit number as a string in DDMMYY format"
-    end
+  def today
+    Time.now.strftime("%d%m%y")
   end
 end

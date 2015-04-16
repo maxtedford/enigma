@@ -17,9 +17,9 @@ class KeyTest < MiniTest::Test
     assert_equal "Unable to proceed. Please enter a five-digit key in string format", key.valid?
   end
 
-  def test_it_shovels_the_key_into_four_pairs_of_numbers
+  def test_it_creates_offsets_as_integers
     key = Key.new("12345")
-    assert_equal ["12", "23", "34", "45"], key.pair_it
+    assert_equal [12, 23, 34, 45], key.offsets
   end
 
   def test_it_can_generate_a_random_five_digit_key_in_string_format
