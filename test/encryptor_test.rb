@@ -4,6 +4,16 @@ require './lib/encryptor'
 
 class EncryptorTest < MiniTest::Test
 
+
+  def test_it_encrypts_a_one_letter_string
+    encryption = Encryptor.new("a")
+    refute_equal "a", encryption.encrypt
+  end
+
+  def test_it_encrypts_a_two_letter_string
+    encryption = Encryptor.new("ab")
+    refute_equal "ab", encryption.encrypt
+  end
   def test_it_encrypts_a_four_letter_string
     encryption = Encryptor.new("ruby")
     refute_equal "ruby", encryption.encrypt

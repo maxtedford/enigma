@@ -15,7 +15,11 @@ attr_reader :hard_key
       hard_key = @hard_key.to_s.rjust(5, "0")
       @key = Key.new(hard_key)
       @secret_war_message = Decryptor.new(@encrypted_message, @key, @date).decrypt
-      @cracked = true if @secret_war_message[-7..-1] == "..end.."
+      @secret_war_message
+      if @secret_war_message[-7..-1] == "..end.."
+        @cracked = true
+      break
+      end
       @hard_key += 1
     end
     @secret_war_message

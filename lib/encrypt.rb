@@ -20,4 +20,3 @@ end
 
 war_message = Encrypt.new
 war_message.write_to_file
-
